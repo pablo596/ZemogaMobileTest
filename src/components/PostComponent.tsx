@@ -28,15 +28,6 @@ const styles = StyleSheet.create({
   post: {
     backgroundColor: 'white',
     borderRadius: 7,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
     marginVertical: 5,
     marginHorizontal: 10,
     padding: 15,
