@@ -4,4 +4,14 @@ module.exports = {
   bracketSpacing: false,
   singleQuote: true,
   trailingComma: 'all',
+  rules: {
+    "prettier/prettier": [
+      "error",
+      {},
+      {
+        "usePrettierrc": false
+      }
+    ]
+  }
+  
 };

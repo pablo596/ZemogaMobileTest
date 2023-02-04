@@ -1,9 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from '@react-navigation/stack';
+import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
 import HomePage from '../pages/HomePage';
 import PostDetails from '../pages/PostDetails';
 import {Post} from '../interfaces/Post';
