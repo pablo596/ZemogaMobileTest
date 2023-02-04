@@ -106,7 +106,7 @@ npx react-native run-ios
 
 - PostDetail: `The PostDetail shows the detail of the post previously selected from HomeScreen, showing Post name, description, author detail, and comment list, and has a star button to toggle the post for favorite.`
 
-### Estructura del proyecto
+### Project structure
 
 Here is the main folder structure that React Native provides.
 
@@ -133,7 +133,7 @@ ZemogaMobileTest
    |- theme/
 ```
 
-Ahora un pequeño resumen de lo que contiene cada carpeta creada para el proyecto.
+Here's a small summary of what each folder created for the project contains.
 
 ```
 1. components - Here all the components created are stored so that they can be reused in the application.
