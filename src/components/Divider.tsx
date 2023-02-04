@@ -1,15 +1,17 @@
 import {View, StyleSheet} from 'react-native';
 import React from 'react';
-
-const Divider = () => {
-  return <View style={styles.divider} />;
+import {size} from '../theme';
+interface Props {
+  width?: number;
+}
+const Divider = ({width = size.width}: Props) => {
+  return <View style={{...styles.divider, width: width}} />;
 };
 
 export default Divider;
 
 const styles = StyleSheet.create({
   divider: {
-    width: '100%',
     height: 1,
     opacity: 0.5,
     backgroundColor: 'grey',
