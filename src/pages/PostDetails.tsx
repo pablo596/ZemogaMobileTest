@@ -15,25 +15,39 @@ import CommentsDetailComponent from '../components/CommentsDetailComponent';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {size} from '../theme';
-import {useGetCommentsQuery, useGetUserQuery} from '../store/apis/postApi';
+import {
+  useDeletePostMutation,
+  useGetCommentsQuery,
+  useGetUserQuery,
+} from '../store/apis/postApi';
+import {setFavorite} from '../store/slices/post';
+import {useDispatch} from 'react-redux';
 
 interface Props extends StackScreenProps<RootStackParams, 'PostDetails'> {}
 
 const PostDetails = ({route}: Props) => {
   const {post} = route.params;
-  const {bottom} = useSafeAreaInsets();
+  const {bottom, top} = useSafeAreaInsets();
   const {data: author = {}} = useGetUserQuery(post.id);
+  const [deletePost, {isLoading: isDeleting}] = useDeletePostMutation();
   const {data: comments = {}} = useGetCommentsQuery(post.id);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(post.favorite);
+  const dispatch = useDispatch();
 
   return (
     <ScrollView>
-      <View style={{...styles.postContainer, marginBottom: bottom}}>
+      <View style={{...styles.postContainer, marginBottom: bottom, top: top}}>
         <View style={styles.postTitleContainer}>
-          <Text style={styles.postTitle}>{post?.title}</Text>
+          <Text style={styles.postTitle}>
+            <Text style={{fontWeight: 'bold'}}>{post.id}.</Text> {post?.title}
+          </Text>
           <TouchableOpacity
             style={styles.postTitleAction}
-            onPress={() => setIsFavorite(!isFavorite)}>
+            onPress={() => {
+              const fav = !isFavorite;
+              dispatch(setFavorite({id: post.id, favorite: fav}));
+              setIsFavorite(fav);
+            }}>
             <AntDesign
               name={isFavorite ? 'star' : 'staro'}
               size={size.height * 0.07}
@@ -53,6 +67,11 @@ const PostDetails = ({route}: Props) => {
           data={<CommentsDetailComponent comments={comments} />}
           title={'Comments'}
         />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => deletePost({id: post.id})}>
+          <Text style={styles.buttonLabel}>Delete Post</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -79,4 +98,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
+  button: {
+    backgroundColor: '#e63946',
+    marginTop: 10,
+    borderRadius: 7,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonLabel: {color: '#fff', fontSize: 20, fontWeight: 'bold'},
 });

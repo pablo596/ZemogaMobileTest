@@ -12,7 +12,12 @@ const CommentsDetailComponent = ({comments}: Props) => {
   return (
     <View style={verticalItemsGap.container}>
       {comments.map(c => (
-        <Item label={c.email} data={c.body} style={verticalItemsGap.child} />
+        <Item
+          label={c.email}
+          data={c.body}
+          style={verticalItemsGap.child}
+          key={c.id}
+        />
       ))}
     </View>
   );
